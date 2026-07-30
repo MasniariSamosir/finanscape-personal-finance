@@ -66,11 +66,11 @@ python app.py
 
 ### 🔐 Login Page
 
-![Login Page](screenshots/login.png)
+![Login Page](Screenshoot/login.png)
 
 ### 📊 Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](Screenshoot/Dashboard.png)
 ---
 
 ## 🎯 Future Improvements
