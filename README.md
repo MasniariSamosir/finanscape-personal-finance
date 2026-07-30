@@ -66,18 +66,11 @@ python app.py
 
 ### 🔐 Login Page
 
-<p align="center">
-  <img src="screenshots/login.png" alt="Login Page" width="900">
-</p>
-
----
+![Login Page](screenshots/login.png)
 
 ### 📊 Dashboard
 
-<p align="center">
-  <img src="screenshots/dashboard.png" alt="Dashboard" width="900">
-</p>
-
+![Dashboard](screenshots/dashboard.png)
 ---
 
 ## 🎯 Future Improvements
