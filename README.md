@@ -64,13 +64,19 @@ python app.py
 
 ## 📸 Application Preview
 
-### Login Page
+### 🔐 Login Page
 
-![Login](screenshots/login.png)
+<p align="center">
+  <img src="screenshots/login.png" alt="Login Page" width="900">
+</p>
 
-### Dashboard
+---
 
-![Dashboard](screenshots/dashboard.png) 
+### 📊 Dashboard
+
+<p align="center">
+  <img src="screenshots/dashboard.png" alt="Dashboard" width="900">
+</p>
 
 ---
 
