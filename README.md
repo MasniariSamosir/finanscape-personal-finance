@@ -66,11 +66,11 @@ python app.py
 
 ### Login Page
 
-*(Add screenshot here)*
+![Login](screenshots/login.png)
 
 ### Dashboard
 
-*(Add screenshot here)*
+![Dashboard](screenshots/dashboard.png) 
 
 ---
 
