@@ -73,10 +73,16 @@ python app.py
 ![Dashboard](Screenshoot/Dashboard.png)
 ---
 
-## 🎯 Future Improvements
+## 🚀 Future Improvements
 
-- Financial charts and analytics
-- Monthly budgeting
-- Data backup & restore
-- Multi-user support
+- Financial analytics dashboard
+- Monthly budgeting and spending analysis
 - Cloud database integration
+- Multi-user support
+- Mobile responsive enhancement
+
+
+## 👩‍💻 Author
+**Masniari Samosir**
+Master of Informatics Engineering – Data Science
+GitHub: https://github.com/MasniariSamosir
