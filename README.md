@@ -1,21 +1,83 @@
-SimpleBudget - A lightweight Flask web app for personal budgeting
+# 💰 Finanscape – Personal Finance Management Application
 
-Features:
-- User register/login (hashed passwords)
-- Add income & expense records with categories
-- Simple savings calculator (target per month)
-- Overspending warning when monthly spending exceeds budget
-- Dashboard with summary and charts (Chart.js)
-- Export transactions to CSV
+Finanscape is a Python-based web application built with Flask that helps users manage their personal finances by recording income, expenses, savings, and financial transactions in one place.
 
-Run locally:
-1. python -m venv venv
-2. (Windows) venv\Scripts\activate  OR (Mac/Linux) source venv/bin/activate
-3. pip install -r requirements.txt
-4. set FLASK_APP=app.py    (Windows PowerShell: $env:FLASK_APP='app.py')
-   export FLASK_APP=app.py (Mac/Linux)
-5. flask run
-OR
+The application provides an interactive dashboard, financial reports, and export features to help users monitor their financial activities efficiently.
+
+---
+
+## 🚀 Features
+
+- User Registration & Login
+- Forgot Password & Password Reset
+- Dashboard with Financial Summary
+- Income Management
+- Expense Management
+- Savings Management
+- Transaction Categories
+- Automatic Balance Calculation
+- Export Reports to Excel
+- Export Reports to PDF
+- SQLite Database
+
+---
+
+## 🛠️ Technologies
+
+- Python
+- Flask
+- SQLite
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+
+---
+
+## 📁 Project Structure
+
+```
+app.py
+templates/
+static/
+requirements.txt
+create_db.py
+```
+
+---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/MasniariSamosir/finanscape-personal-finance.git
+
+cd finanscape-personal-finance
+
+pip install -r requirements.txt
+
+python create_db.py
+
 python app.py
+```
 
-The app uses a local SQLite database (data.db) created automatically on first run.
+---
+
+## 📸 Application Preview
+
+### Login Page
+
+*(Add screenshot here)*
+
+### Dashboard
+
+*(Add screenshot here)*
+
+---
+
+## 🎯 Future Improvements
+
+- Financial charts and analytics
+- Monthly budgeting
+- Data backup & restore
+- Multi-user support
+- Cloud database integration
