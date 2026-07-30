@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Transaksi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-4">
+  <h2>Edit Transaksi</h2>
+  <form method="POST">
+    <div class="mb-3">
+      <label>Jenis</label>
+      <select name="type" class="form-select">
+        <option value="Pemasukan" {% if tx.type=="Pemasukan" %}selected{% endif %}>Pemasukan</option>
+        <option value="Pengeluaran" {% if tx.type=="Pengeluaran" %}selected{% endif %}>Pengeluaran</option>
+        <option value="Tabungan" {% if tx.type=="Tabungan" %}selected{% endif %}>Tabungan</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label>Jumlah</label>
+      <input type="number" step="0.01" name="amount" value="{{tx.amount}}" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label>Kategori</label>
+      <input type="text" name="category" value="{{tx.category.name}}" class="form-control">
+    </div>
+    <button class="btn btn-primary">Simpan</button>
+    <a href="{{url_for('index')}}" class="btn btn-secondary">Batal</a>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Finanscape</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <style>
+    /* Styling Khusus Halaman Login (Override) */
+    body {
+      background: url("{{ url_for('static', filename='bgfinancescape.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Overlay Transparan */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 64, 0.5); /* Biru gelap transparan */
+      backdrop-filter: blur(3px);
+      z-index: 0;
+    }
+
+    .login-card {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      padding: 40px; /* Padding Default Desktop */
+      width: 100%;
+      max-width: 420px;
+      margin: 20px; /* Jarak aman dari pinggir layar */
+    }
+
+    .login-logo {
+      width: 100px; /* Ukuran logo default */
+      margin-bottom: 15px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-login {
+      background: linear-gradient(90deg, #1e3c72, #2563eb);
+      color: #fff;
+      font-weight: 600;
+      padding: 12px;
+      border: none;
+    }
+    
+    .btn-login:hover {
+      background: linear-gradient(90deg, #2563eb, #1e3c72);
+      color: white;
+    }
+
+    /* === BAGIAN PENTING: RESPONSIF UNTUK HP === */
+    @media (max-width: 576px) {
+      .login-card {
+        padding: 25px 20px; /* Padding diperkecil (Atas-Bawah 25, Kiri-Kanan 20) */
+        max-width: 90%;     /* Lebar kartu 90% dari layar HP */
+      }
+
+      .login-logo {
+        width: 80px; /* Logo diperkecil sedikit di HP */
+      }
+
+      h3 {
+        font-size: 1.5rem; /* Judul LOGIN tidak terlalu besar */
+      }
+      
+      .form-control {
+        font-size: 16px; /* Mencegah zoom otomatis di iPhone */
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+    <img src="{{ url_for('static', filename='finanscape-logo1.png') }}" alt="Logo" class="login-logo">
+    
+    <h3 class="text-center mb-4 fw-bold text-primary">LOGIN</h3>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show p-2 mb-3" role="alert" style="font-size: 0.9rem;">
+            {{ msg }}
+            <button type="button" class="btn-close small" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="mb-3">
+        <input type="text" name="identifier" class="form-control" placeholder="Username atau Email" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+      </div>
+      
+      <div class="d-flex justify-content-end mb-3">
+        <a href="{{ url_for('forgot_password') }}" class="text-decoration-none small">Lupa Password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-login w-100 mb-3">Masuk</button>
+    </form>
+
+    <div class="text-center mt-2 small">
+      Belum punya akun? <a href="{{ url_for('register') }}" class="text-primary text-decoration-none fw-bold">Daftar sekarang</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

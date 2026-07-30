@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid mt-2">
+  <h3 class="fw-bold mb-4 text-primary">Dashboard</h3>
+
+  <!-- Kartu Ringkasan -->
+  <div class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm border-0 p-3 text-center">
+        <h6 class="fw-semibold text-secondary">Total Pemasukan</h6>
+        <h4 class="fw-bold text-success">Rp {{ "{:,.0f}".format(total_income) }}</h4>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm border-0 p-3 text-center">
+        <h6 class="fw-semibold text-secondary">Total Pengeluaran</h6>
+        <h4 class="fw-bold text-danger">Rp {{ "{:,.0f}".format(total_expense) }}</h4>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm border-0 p-3 text-center">
+        <h6 class="fw-semibold text-secondary">Saldo Akhir</h6>
+        <h4 class="fw-bold text-primary">Rp {{ "{:,.0f}".format(balance) }}</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Atur Budget -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+      <form class="row g-2 align-items-center" method="post" action="/set_budget">
+        <div class="col-auto">
+          <input class="form-control" name="budget" type="number" step="0.01"
+                 value="{{ budget }}" placeholder="Set monthly budget (Rp)">
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-success">Set Budget</button>
+        </div>
+        <div class="col-auto">
+          <a class="btn btn-outline-secondary" href="/export">Export CSV</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notifikasi Overspend -->
+  {% if overspend %}
+  <div class="alert alert-warning shadow-sm">⚠️ Peringatan: Pengeluaran bulan ini melebihi budget!</div>
+  {% endif %}
+
+  <!-- Chart & Transaksi -->
+  <div class="row">
+    <!-- Grafik -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm border-0 p-3">
+        <h6 class="fw-bold text-secondary mb-3">Distribusi Pengeluaran per Kategori</h6>
+        <canvas id="catChart" height="250"></canvas>
+      </div>
+    </div>
+
+    <!-- Tabel Transaksi -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm border-0 p-3">
+        <h6 class="fw-bold text-secondary mb-3">Transaksi Terbaru</h6>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Tipe</th>
+                <th>Jumlah</th>
+                <th>Kategori</th>
+                <th>Tanggal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if transactions %}
+                {% for t in transactions %}
+                <tr>
+                  <td>{{ t['type'] }}</td>
+                  <td>Rp {{ "{:,.0f}".format(t['amount']) }}</td>
+                  <td>{{ t['category'] }}</td>
+                  <td>{{ t['date'] }}</td>
+                </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="4" class="text-center text-muted">Belum ada transaksi yang tercatat.</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Chart.js ===== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Parse JSON dengan aman agar tidak bikin lint error
+  const byCategory = JSON.parse('{{ by_category | tojson | safe }}');
+
+  const labels = Object.keys(byCategory);
+  const data = Object.values(byCategory);
+
+  const ctx = document.getElementById('catChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        borderWidth: 1,
+        backgroundColor: [
+          '#3b82f6', '#10b981', '#f59e0b', '#ef4444',
+          '#8b5cf6', '#ec4899', '#14b8a6', '#6366f1'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 13 }
+          }
+        },
+        title: { display: false }
+      }
+    }
+  });
+</script>
+
+{% endblock %}

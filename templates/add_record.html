@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h3>Tambah Transaksi</h3>
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Tipe</label>
+        <select name="type" class="form-control">
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Jumlah</label>
+        <input class="form-control" name="amount" type="number" step="0.01" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Kategori</label>
+        <input class="form-control" name="category" placeholder="makan, transport, bisnis...">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Catatan (opsional)</label>
+        <input class="form-control" name="note">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tanggal (YYYY-MM-DD)</label>
+        <input class="form-control" name="date">
+      </div>
+      <button class="btn btn-primary">Simpan</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

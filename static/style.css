@@ -1,0 +1,156 @@
+/* ================= FONTS & GLOBAL ================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f2f5; /* Warna abu muda bersih */
+    overflow-x: hidden;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%); /* Biru gradasi */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    height: 60px;
+    z-index: 1040;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* ================= SIDEBAR ================= */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    margin-top: 60px; /* Jarak dari navbar */
+}
+
+#sidebar {
+    min-width: 260px;
+    max-width: 260px;
+    background: #ffffff; /* Sidebar Putih Bersih */
+    color: #333;
+    transition: all 0.3s;
+    border-right: 1px solid #ddd;
+    min-height: calc(100vh - 60px);
+    z-index: 1035;
+}
+
+/* Sidebar Header Profile (Mirip Gambar 2) */
+.sidebar-header {
+    background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%); /* Header biru di sidebar */
+    color: #fff;
+    border-bottom: 4px solid #facc15; /* Aksen kuning sedikit */
+}
+
+.profile-img-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* Sidebar Links */
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul li a {
+    padding: 15px 25px;
+    font-size: 1rem;
+    display: block;
+    color: #555;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+#sidebar ul li a:hover {
+    background: #f8f9fa;
+    color: #1e3c72;
+    padding-left: 30px; /* Efek geser saat hover */
+}
+
+#sidebar ul li.active > a {
+    color: #2563eb;
+    background: #eff6ff;
+    border-right: 4px solid #2563eb;
+    font-weight: 700;
+}
+
+/* ================= CONTENT ================= */
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* Overlay Hitam (Saat menu HP terbuka) */
+#overlay {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    top: 0; 
+    left: 0;
+}
+
+/* ================= RESPONSIVE (HP / MOBILE) ================= */
+@media (max-width: 991px) {
+    /* Sembunyikan Sidebar ke Kiri Layar (-260px) */
+    #sidebar {
+        margin-left: -260px;
+        position: fixed;
+        height: 100vh; /* Full height */
+        top: 0; /* Mulai dari paling atas menutupi navbar */
+        z-index: 2000; /* Di atas segalanya */
+        box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+    }
+
+    /* Saat tombol hamburger diklik (class active ditambahkan JS) */
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    /* Tampilkan Overlay */
+    #overlay.active {
+        display: block;
+        opacity: 1;
+        z-index: 1999; /* Di bawah sidebar tapi di atas konten */
+    }
+
+    /* Header sidebar disesuaikan agar tombol close terlihat (opsional) */
+    .sidebar-header {
+        padding-top: 3rem; 
+    }
+    
+    /* Tombol Hamburger di Navbar */
+    .navbar-brand {
+        font-size: 1.1rem; /* Perkecil font dikit */
+    }
+}
+
+/* ================= CARD STYLE (Mirip Gambar 1) ================= */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background: #fff;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.card-header {
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 700;
+    padding: 15px 20px;
+    color: #333;
+}

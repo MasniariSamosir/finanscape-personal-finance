@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Master</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f5f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .header-bar {
+      background: #1e3c72;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    .nav-tabs .nav-link.active {
+      background: #1e3c72;
+      color: #fff !important;
+      font-weight: 600;
+    }
+    .btn-add {
+      background: #1e3c72;
+      color: #fff;
+    }
+    .btn-add:hover {
+      background: #2a5298;
+    }
+    .btn-delete {
+      background: #e63946;
+      color: #fff;
+    }
+    .btn-delete:hover {
+      background: #d62828;
+    }
+    .btn-edit {
+      background: #ffc107;
+      color: #000;
+    }
+    .btn-edit:hover {
+      background: #e0a800;
+    }
+    table thead {
+      background: #1e3c72;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <!-- Header -->
+    <div class="header-bar">Data Master</div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-3" id="categoryTabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#pemasukan">Pemasukan</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#pengeluaran">Pengeluaran</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#tabungan">Tabungan</a>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <!-- Pemasukan -->
+      <div class="tab-pane fade show active" id="pemasukan">
+        <div class="card p-3 mb-3">
+          <h5 class="mb-3">Tambah Kategori Pemasukan</h5>
+          <form method="POST" action="{{ url_for('add_category') }}" class="row g-2">
+            <div class="col-md-9">
+              <input type="text" name="name" class="form-control" placeholder="Masukkan nama kategori" required>
+              <input type="hidden" name="type" value="Income">
+            </div>
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-add w-100">Tambah</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card p-3">
+          <h5>Daftar Kategori Pemasukan</h5>
+          <table class="table table-bordered mt-3">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cat in income_categories %}
+              <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.name }}</td>
+                <td>
+                  <a href="{{ url_for('edit_category', id=cat.id) }}" class="btn btn-edit btn-sm">Edit</a>
+                  <form method="POST" action="{{ url_for('delete_category', id=cat.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-delete btn-sm">Hapus</button>
+                  </form>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="3" class="text-center text-muted">Belum ada kategori pemasukan</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pengeluaran -->
+      <div class="tab-pane fade" id="pengeluaran">
+        <div class="card p-3 mb-3">
+          <h5 class="mb-3">Tambah Kategori Pengeluaran</h5>
+          <form method="POST" action="{{ url_for('add_category') }}" class="row g-2">
+            <div class="col-md-9">
+              <input type="text" name="name" class="form-control" placeholder="Masukkan nama kategori" required>
+              <input type="hidden" name="type" value="Expense">
+            </div>
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-add w-100">Tambah</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card p-3">
+          <h5>Daftar Kategori Pengeluaran</h5>
+          <table class="table table-bordered mt-3">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cat in expense_categories %}
+              <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.name }}</td>
+                <td>
+                  <a href="{{ url_for('edit_category', id=cat.id) }}" class="btn btn-edit btn-sm">Edit</a>
+                  <form method="POST" action="{{ url_for('delete_category', id=cat.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-delete btn-sm">Hapus</button>
+                  </form>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="3" class="text-center text-muted">Belum ada kategori pengeluaran</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tabungan -->
+      <div class="tab-pane fade" id="tabungan">
+        <div class="card p-3 mb-3">
+          <h5 class="mb-3">Tambah Kategori Tabungan</h5>
+          <form method="POST" action="{{ url_for('add_category') }}" class="row g-2">
+            <div class="col-md-9">
+              <input type="text" name="name" class="form-control" placeholder="Masukkan nama kategori" required>
+              <input type="hidden" name="type" value="Tabungan">
+            </div>
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-add w-100">Tambah</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card p-3">
+          <h5>Daftar Kategori Tabungan</h5>
+          <table class="table table-bordered mt-3">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cat in saving_categories %}
+              <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.name }}</td>
+                <td>
+                  <a href="{{ url_for('edit_category', id=cat.id) }}" class="btn btn-edit btn-sm">Edit</a>
+                  <form method="POST" action="{{ url_for('delete_category', id=cat.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-delete btn-sm">Hapus</button>
+                  </form>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="3" class="text-center text-muted">Belum ada kategori tabungan</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tombol kembali -->
+    <div class="mt-3">
+      <a href="{{ url_for('index') }}" class="btn btn-secondary">⬅ Kembali ke Dashboard</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
